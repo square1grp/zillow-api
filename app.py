@@ -1,5 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restplus import Api, Resource, fields, marshal_with
+import single_listing
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,7 +25,8 @@ class Zillow(Resource):
 
         if 'type' in request.json:
             if request.json['type'] == 'single-listing':
-                return 'Single Listing Result'
+                listing_data = single_listing.crawl(request.json['url'])
+                return jsonify(listing_data)
             elif request.json['type'] == 'fsbo':
                 return 'FSBO result'
 
