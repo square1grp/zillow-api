@@ -1,5 +1,4 @@
 import requests
-import webbrowser
 from lxml import etree
 import json
 from config import api_key
